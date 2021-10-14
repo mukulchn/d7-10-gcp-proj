@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: nginx-team
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:       # This is the label is being selected by the Deployment,
+      app: nginx       # meaning any Pod with this label is part of this Deployment spec
+  replicas: 1
+  template:            
+    metadata:
+      labels:
+        app: nginx     # This label must match what is specified in the selector
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - name: http-port
+          containerPort: 80

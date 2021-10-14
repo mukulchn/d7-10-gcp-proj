@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+  namespace: apache-team
+  labels:
+    app: httpd
+spec:
+  selector:
+    matchLabels:       # This is the label is being selected by the Deployment,
+      app: httpd       # meaning any Pod with this label is part of this Deployment spec
+  replicas: 1
+  template:            
+    metadata:
+      labels:
+        app: httpd     # This label must match what is specified in the selector
+    spec:
+      containers:
+      - name: httpd
+        image: httpd
+        ports:
+        - name: http-port
+          containerPort: 80

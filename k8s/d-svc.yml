@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:            # This selector references the label in the Pod
+    app: nginx         # template spec for the Deployment
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
